@@ -1,19 +1,18 @@
 pipeline {
-
-    agent any 
+    agent any
 
     stages {
-        
-        stage('S1 5719303J') {
+        stage('S1_5719303J') {
             steps {
-                echo “Stage1_5719303J : Release Environment Preparation Completed”
+                echo "Stage1_5719303J : Release Environment Preparation Completed"
             }
         }
-
-        stage('S2 5719303J') {
-             steps {
+        
+        
+        stage('S2_5719303J') {
+            steps {
                 script {
-                    def imageName = 'wb1_image_5719303J' 
+                    def imageName = 'wb1_image_5719303j' 
                     def containerName = 'WebApp_5719303J' 
 
                     sh "docker stop ${containerName}"
@@ -23,25 +22,24 @@ pipeline {
                 }
             }
       }
-
-     stage('S3 5719303J') {
-
-    	parallel {
-
-        	stage('S3 API TEST') {
-            		steps {
-                		echo “Stage3_5719303J: API Test Completed”
-            		}
-        	}
-        	stage('S3 SCAN TEST'){
-            		steps{
-                    		echo “Stage3_5719303J: Scan Test Completed”
-    			}   
-		}
-	 }
-}
-        stage('S4 5719303J'){
-            steps{
+        
+        stage('S3_5719303J') {
+            parallel {
+                stage('S3 API Test') {
+                    steps {
+                        echo "Stage3_5719303J: API Test Completed"
+                    }
+                }
+                stage('S3 Scan Test') {
+                    steps {
+                        echo "Stage3_5719303J: Scan Test Completed"
+                    }
+                }
+            }
+        }
+        
+        stage('S4_5719303J') {
+            steps {
                 script {
                     s4Input = input(id: 'S4Input', message: '5719303J, proceed to release the work to next phase?', parameters: [booleanParam(defaultValue: true, description: 'Click Proceed or Abort', name: 'Proceed')])
                     if (s4Input) {
@@ -52,17 +50,18 @@ pipeline {
                 }
             }
         }
- 	stage('S5 5719303J'){
-            steps{
+        
+        stage('S5_5719303J') {
+            steps {
                 script {
                     if (env.DECISION == 'proceed') {
-                        echo "Stage 5 5719303J : Work Release – Proceeds to Next Phase"
+                        echo "Stage5_5719303J : Work Release – Proceeds to Next Phase"
                     } else {
-                        echo "Stage 5 5719303J : Work Release - Stops"
+                        echo "Stage5_5719303J : Work Release - Stops"
                         currentBuild.result = 'ABORTED'
                     }
                 }
             }
         }
     }
-  }
+}
