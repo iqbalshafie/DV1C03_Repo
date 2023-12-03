@@ -22,7 +22,7 @@ environment {
 
 stages {
     
-    stage('Stage1') {
+    stage('Stage1 5719303j') {
         steps {
             sh """
             echo "Stage1_5719303j : Release Environment Preparation Completed"
@@ -30,7 +30,7 @@ stages {
         }
     }
 
-    stage('Stage2') {
+    stage('Stage2_5719303j') {
         steps {
             sh """
             docker stop webapp_5719303j || true
@@ -41,16 +41,16 @@ stages {
         }
     }
 
-    stage('Stage3') {
+    stage('Stage3_5719303j') {
         parallel {
-            stage('API Test') {
+            stage('S3 API Test') {
                 steps {
                     sh """
                     echo "Stage3_5719303j: API Test Completed"
                     """
                 }
             }
-            stage('Scan Test') {
+            stage('S3 Scan Test') {
                 steps {
                     sh """
                     echo "Stage3_5719303j: Scan Test Completed"
@@ -60,7 +60,7 @@ stages {
         }
     }
 
-    stage('Stage4') {
+    stage('Stage4_5719303j') {
         steps {
             script {
                 def userInput = input(
@@ -76,7 +76,7 @@ stages {
     }
 
 
-stage('Stage5') {
+stage('Stage5_5719303j') {
         when {
             expression {
                 return env.STAGE_NAME == 'Stage5'
