@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     def imageName = 'wb1_image_5719303j' 
-                    def containerName = 'WebApp_5719303J' 
+                    def containerName = 'webapp_5719303j' 
 
                     sh "docker stop ${containerName}"
                     sh "docker rm ${containerName}"
