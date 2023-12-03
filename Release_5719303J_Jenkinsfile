@@ -8,18 +8,19 @@ pipeline {
             }
         }
         
-        
-        stage('S2_5719303J') {
+           stage('S2_5719303J') {
             steps {
-            sh """
-            docker stop webapp_5719303j || true
-            docker rm webapp_5719303j || true
-            docker run -d --name webapp_5719303j -p 31200:80 wb1_image_5719303j
-            echo "Stage2_5719303j : Release Container webapp_5719303j Created Completed"
-            """
+                script {
+                    def imageName = 'wb1_image_5719303j' 
+                    def containerName = 'webapp_5719303j' 
+
+                    sh "docker stop ${containerName}"
+                    sh "docker rm ${containerName}"
+
+                    sh "docker run -d --name ${containerName} -p 31200:80 ${imageName}"
+                }
+            }
         }
-    }
-        
         stage('S3_5719303J') {
             parallel {
                 stage('S3 API Test') {
