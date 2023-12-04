@@ -14,10 +14,10 @@ pipeline {
                     def imageName = 'wb1_image_5719303j' 
                     def containerName = 'webapp_5719303j' 
 
-                    sh "docker stop ${containerName}"
-                    sh "docker rm ${containerName}"
+                    sh "docker stop ${webapp_5719303j}"
+                    sh "docker rm ${webapp_5719303j}"
 
-                    sh "docker run -d --name ${containerName} -p 31200:80 ${imageName}"
+                    sh "docker run -d --name ${webapp_5719303j} -p 31200:80 ${wb1_image_5719303j}"
                 }
             }
         }
